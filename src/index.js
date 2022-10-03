@@ -20,7 +20,6 @@ mongoose.connect(process.env.DATABASE_URL)
     console.log(err);
   });
 
-// module.exports = app;
 app.use('/',routes);
 
 

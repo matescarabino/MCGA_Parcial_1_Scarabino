@@ -2,7 +2,7 @@ const Products = require('../models/products');
 
 //Ping
 const ping = (req, res) => {
-        res.send("OK. DB Connected!");
+    res.send("OK. DB Connected!");
 };
 
 //Get All
@@ -14,9 +14,14 @@ const getAll = (req, res) => {
 
 //Get
 const getId = (req, res) => {
-    const {_id} = req.params;
+    const { _id } = req.params;
     Products.findById(parseInt(_id))
-        .then((data) => res.status(200).json({ msg: "Product by Id", data, error: false }))
+        .then((data) => {
+            if (!data) {
+                return res.status(404).json({msg: "Product not found"})
+            };
+            res.status(200).json({ msg: "Product by Id", data, error: false })
+        })
         .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true }));
 };
 
@@ -34,7 +39,7 @@ const updateProduct = (req, res) => {
     const { _id } = req.params;
     Products.findByIdAndUpdate(parseInt(_id), req.body, { new: true })
         .then((data) => {
-            if (data.length === 0) return res.status(404).json({ msg: `Product not found by ID: ${_id}`, data: {}, error: true });
+            if (!data || data.length === 0) return res.status(404).json({ msg: `Product not found by ID: ${_id}`, data: {}, error: true });
             return res.status(202).json({ msg: "Product updated", data, error: false });
         })
         .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true }));
@@ -43,9 +48,9 @@ const updateProduct = (req, res) => {
 // Delete
 const deleteProduct = (req, res) => {
     const { _id } = req.params;
-    Products.findByIdAndUpdate(parseInt(_id), {isDeleted: true})
+    Products.findByIdAndUpdate(parseInt(_id), { isDeleted: true })
         .then((data) => {
-            if (data.length === 0) return res.status(404).json({ msg: `Product not found by ID: ${id}`, data: {}, error: true });
+            if (!data || data.length === 0) return res.status(404).json({ msg: `Product not found by ID: ${id}`, data: {}, error: true });
             return res.status(202).json({ msg: "Product deleted", data, error: false });
         })
         .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true }));
