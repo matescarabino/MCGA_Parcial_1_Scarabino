@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const routes = require('./routes/Products');
 
 dotenv.config();
 // Middleware Json
@@ -19,6 +20,7 @@ mongoose.connect(process.env.DATABASE_URL)
     console.log(err);
   });
 
-module.exports = app;
+// module.exports = app;
+app.use('/',routes);
 
 
