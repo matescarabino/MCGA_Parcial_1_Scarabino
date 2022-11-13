@@ -28,11 +28,17 @@ const getId = (req, res) => {
 
 // Post
 const postProduct = (req, res) => {
-    const { _id, name, price, stock, description } = req.body;
-    const newProduct = { _id, name, price, stock, description };
-    Products.create(newProduct)
-        .then((data) => res.status(201).json({ msg: "Product added: ", data, error: false }))
-        .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true }));
+    console.log('estoy aca');
+    const {name, price, stock, description } = req.body;
+    const sumLastId= Products.find().sort({$natural:-1}).limit(1)
+                .then((data)=> {
+                    console.log("el stock es :"+data[0].stock + "id: "+ data[0]._id);
+                    const newProduct = { _id:data[0]._id+1, name, price, stock, description };
+                    Products.create(newProduct)
+                        .then((data) => res.status(201).json({ msg: "Product added: ", data, error: false }))
+                        .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true }));                     
+                    })
+                    .catch((err) => res.status(500).json({ msg: `Error: ${err}`, data: {}, error: true })); 
 };
 
 // Update
