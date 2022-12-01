@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {ping, getAll, getId, postProduct, updateProduct, deleteProduct} = require('../controllers/Products.js');
-
-//Ping DB
-router.get('/',ping);
+const {getAll, getId, postProduct, updateProduct, deleteProduct} = require('../controllers/Products.js');
 
 //Get All Products
 router.get('/products',getAll);
