@@ -25,24 +25,25 @@
 // app.use('/',routes);
 
 
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-const routes = require('./routes/Products');
-const dotenv = require("dotenv");
+import mongoose from 'mongoose';
+import express from 'express';
+import cors from 'cors';
+import routes from './routes/Products.js';
 
 const app = express();
 
-dotenv.config();
-
 app.use(express.json());
 app.use(cors());
-app.use('/api',routes);
+app.use('/api', routes);
 
 app.get('/', async (req, res) => {
-  res.send('OK. BE working!');
+  res.send('Hello World!');
 });
-const port = process.env.PORT || 4000;
+
+import { config } from "dotenv";
+        config({ path: process.ENV })
+
+const port = process.env.PORT;
 
 mongoose.connect(
   process.env.DATABASE_URL,
@@ -57,3 +58,4 @@ mongoose.connect(
     }
   },
 );
+

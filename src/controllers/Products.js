@@ -1,9 +1,4 @@
-const Products = require('../models/products');
-
-//Ping
-const ping = (req, res) => {
-    res.send("OK. DB Connected!");
-};
+import Products from '../models/Products.js';
 
 //Get All
 const getAll = (req, res) => {
@@ -68,8 +63,7 @@ const deleteProduct = (req, res) => {
 };
 
 // Exports
-module.exports = {
-    ping,
+export default {
     getAll,
     getId,
     postProduct,
