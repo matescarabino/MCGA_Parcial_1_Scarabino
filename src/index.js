@@ -28,7 +28,7 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
-import routes from './routes/Products.js';
+import routes from './routes/index.js';
 
 const app = express();
 
@@ -41,7 +41,7 @@ app.get('/', async (req, res) => {
 });
 
 import { config } from "dotenv";
-        config({ path: process.ENV })
+config({ path: process.ENV })
 
 const port = process.env.PORT;
 
