@@ -6,10 +6,12 @@ import { ADMIN } from '../constants/roles.js';
 
 const router = express.Router();
 
-router.get('/', checkAuth([ADMIN]), productsControllers.getAll);
-router.get('/:_id', checkAuth([ADMIN]), productsControllers.getId);
-router.post('/add', checkAuth([ADMIN]), productsControllers.postProduct);
-router.put('/update/:_id', checkAuth([ADMIN]), productsControllers.updateProduct);
-router.delete('/delete/:_id', checkAuth([ADMIN]), productsControllers.deleteProduct);
+// checkAuth()
+
+router.get('/', productsControllers.getAll);
+router.get('/:_id', productsControllers.getId);
+router.post('/add', productsControllers.postProduct);
+router.put('/update/:_id', productsControllers.updateProduct);
+router.delete('/delete/:_id', productsControllers.deleteProduct);
 
 export default router;
