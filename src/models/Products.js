@@ -14,11 +14,13 @@ const ProductsSchemas = new Schema({
     },
     price:{
         type: Number,
-        maxlenght: 50,
+        maxlenght: 14,
+        min: 0,
     },
     stock:{
         type: Number,
-        maxlenght: 50,
+        maxlenght: 14,
+        min: 0,
     },
     description:{
         type: String,

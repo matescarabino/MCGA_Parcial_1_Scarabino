@@ -8,7 +8,7 @@ const checkAuth = () => async (req, res, next) => {
         message: 'Provide Token',
       });
     }
-    const user = await app.auth().verifyIdToken(token);
+    await app.auth().verifyIdToken(token);
 
     return next();
 
