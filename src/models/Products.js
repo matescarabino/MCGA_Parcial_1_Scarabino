@@ -4,9 +4,6 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const ProductsSchemas = new Schema({
-    _id:{
-        type: Number
-    },
     name:{
         type: String,
         required: true,
